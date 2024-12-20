@@ -80,7 +80,7 @@ Access marketplace page from footer
 Access cari supplier page from footer
     Given user is on home page
     When user go to cari supplier page from footer
-    Then user is on cari supplier page
+    Then user is on supplier list katalog page
 
 Access syarat & ketentuan page from footer
     Given user is on home page

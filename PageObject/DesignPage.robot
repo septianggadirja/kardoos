@@ -12,8 +12,9 @@ ${inputWidthCustomOnDesignPage}               xpath=//input[@id='width']
 ${inputHeightCustomOnDesignPage}              xpath=//input[@id='height']
 ${buttonApplyUkuranOnDesignPage}              xpath=//button[text()='Apply']
 ${buttonMaterialOnDesignPage}                 xpath=//button[@id='Material']
-${buttonMaterialEcokraftOnDesignPage}         xpath=//h2[@type='button' and text()='EcoKraft']
-${buttonMaterialPremiumOnDesignPage}          xpath=//h2[@type='button' and text()='Premium']
+${buttonMaterialEcokraftBrownOnDesignPage}    xpath=//p[text()='EcoKraft - Brown']
+${buttonMaterialEcokraftWhiteOnDesignPage}    xpath=//p[text()='EcoKraft - White']
+${buttonMaterialPremiumWhiteOnDesignPage}     xpath=//p[text()='Premium White']
 ${textMaterialOptionOnDesignPage}             xpath=//h2[text()='EcoKraft']//parent::div/following-sibling::div//div/p
 ${textKecepatanProduksiOptionOnDesignPage}    xpath=//p[text()='Kecepatan Produksi']/following-sibling::div//span
 ${inputQtyOnDesignPage}                       xpath=//input[@id='quantityBox']                            
@@ -60,8 +61,10 @@ user choose material kardus
     [Arguments]    ${MaterialTypeKardus}
     Wait Until Element Is Visible    ${buttonMaterialOnDesignPage}
     Click Element                    ${buttonMaterialOnDesignPage}
-    Run Keyword If                   '${MaterialTypeKardus}' == 'EcoKraft'    Click Element    ${buttonMaterialEcokraftOnDesignPage}
-    ...  ELSE                        Click Element                            ${buttonMaterialPremiumOnDesignPage}
+    Sleep    5
+    Run Keyword If                   '${MaterialTypeKardus}' == 'EcoKraft - Brown'    Click Element    ${buttonMaterialEcokraftBrownOnDesignPage}
+    ...  ELSE IF                     '${MaterialTypeKardus}' == 'EcoKraft - White'    Click Element    ${buttonMaterialEcokraftWhiteOnDesignPage}
+    ...  ELSE                        Click Element                                    ${buttonMaterialPremiumWhiteOnDesignPage}
 
 user choose bahan kardus
     [Arguments]    ${MaterialTypeKardus}    ${MaterialNameKardus}
@@ -88,12 +91,12 @@ user input qty kardus
     Input Text                           ${inputQtyOnDesignPage}    ${QtyKardus}
 
 user add design product
-    [Arguments]    ${ModelKardus}    ${TipeUkuranKardus}    ${PanjangKardus}    ${LebarKardus}    ${TinggiKardus}    ${MaterialTypeKardus}    ${MaterialNameKardus}    ${KecepatanProduksi}    ${QtyKardus}
+    [Arguments]    ${ModelKardus}    ${TipeUkuranKardus}    ${PanjangKardus}    ${LebarKardus}    ${TinggiKardus}    ${MaterialTypeKardus}    ${KecepatanProduksi}    ${QtyKardus}
     user choose model kardus    ${ModelKardus}
     user choose tipe ukuran kardus    ${TipeUkuranKardus}
     user input ukuran custom kardus    ${PanjangKardus}    ${LebarKardus}    ${TinggiKardus}
     user choose material kardus    ${MaterialTypeKardus}
-    user choose bahan kardus    ${MaterialTypeKardus}    ${MaterialNameKardus}
+    # user choose bahan kardus    ${MaterialTypeKardus}    ${MaterialNameKardus}
     user choose kecepatan produksi kardus    ${KecepatanProduksi}
     user input qty kardus    ${QtyKardus}
     Sleep    10

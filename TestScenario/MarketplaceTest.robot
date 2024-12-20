@@ -3,6 +3,7 @@ Resource    ../PageObject/HomePage.robot
 Resource    ../PageObject/KatalogPage.robot
 Resource    ../PageObject/ProductDetailPage.robot
 Resource    ../PageObject/SupplierDetailPage.robot
+Resource    HomeTest.robot
 
 *** Keywords ***
 Get catalog list on marketplace
@@ -45,3 +46,28 @@ Get supplier detail from supplier catalog
     When user get supplier list on katalog page
     And user go to supplier detail from katalog page
     Then verify data on supplier detail page
+
+Get product catalog from minta penawaran harga on marketplace
+    Given Access marketplace page from footer
+    When user click button minta penawaran harga on marketplace page
+    Then user is on katalog page
+
+Get product catalog from pilih sekarang on marketplace
+    Given Access marketplace page from footer
+    When user click button pilih sekarang on marketplace page
+    Then user is on katalog page
+
+Get supplier list from cari sekarang on marketplace
+    Given Access marketplace page from footer
+    When user click button cari sekarang on marketplace page
+    Then user is on supplier list katalog page
+
+Get supplier list from cek sekarang on marketplace
+    Given Access marketplace page from footer
+    When user click button cek sekarang on marketplace page
+    Then user is on supplier list katalog page
+
+Get product catalog from coba sekarang on marketplace
+    Given Access marketplace page from footer
+    When user click button coba sekarang on marketplace page
+    Then user is on katalog page

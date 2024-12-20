@@ -80,6 +80,12 @@ user get supplier list on katalog page
     Wait Until Element Is Visible        ${buttonSuppliersOnKatalogPage}
     Click Element                        ${buttonSuppliersOnKatalogPage}
 
+user is on supplier list katalog page
+    Wait Until Element Is Visible        ${buttonSuppliersOnKatalogPage}
+    ${current_url}=    Get Location
+    Log                Current URL: ${current_url}
+    Should Contain     ${current_url}                    /katalog?option
+    
 user go to supplier detail from katalog page
     Wait Until Element Is Visible        ${textSupplierAddressOnKatalogPage}
     ${totalsupplier}                     Get Element Count                                   ${textSupplierAddressOnKatalogPage}

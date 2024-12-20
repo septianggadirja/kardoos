@@ -42,3 +42,28 @@ verify user can get supplier detail from katalog page
     [Documentation]        This scenario to test user can get supplier detail from marketplace
     [Tags]                 marketplace    positive    dev    staging     production                       
     Get supplier detail from supplier catalog
+
+verify user can get product catalog from minta penawaran harga on marketplace page
+    [Documentation]        This scenario to test user can get product catalog from minta penawaran harga on marketplace page
+    [Tags]                 marketplace    positive    dev    staging     production            
+    Get product catalog from minta penawaran harga on marketplace
+
+verify user can get product catalog from pilih sekarang on marketplace page
+    [Documentation]        This scenario to test user can get product catalog from pilih sekarang on marketplace page
+    [Tags]                 marketplace    positive    dev    staging     production            
+    Get product catalog from pilih sekarang on marketplace
+
+verify user can get supplier list from cari sekarang harga on marketplace page
+    [Documentation]        This scenario to test user can get supplier list from cari sekarang harga on marketplace page
+    [Tags]                 marketplace    positive    dev    staging     production            
+    Get supplier list from cari sekarang on marketplace
+
+verify user can get supplier list from cek sekarang harga on marketplace page
+    [Documentation]        This scenario to test user can get supplier list from cek sekarang harga on marketplace page
+    [Tags]                 marketplace    positive    dev    staging     production            
+    Get supplier list from cek sekarang on marketplace
+
+verify user can get product catalog from coba sekarang on marketplace page
+    [Documentation]        This scenario to test user can get product catalog from coba sekarang on marketplace page
+    [Tags]                 marketplace    positive    dev    staging     production            
+    Get product catalog from coba sekarang on marketplace

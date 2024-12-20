@@ -2,7 +2,7 @@
 Library    SeleniumLibrary
 
 *** Variables ***
-${buttonPengaturan}        xpath=(//div[@class='pembatas']/preceding-sibling::div[@class='item-header'])[3]
+${buttonPengaturan}                         xpath=(//div[@class='pembatas']/preceding-sibling::div[@class='item-header'])[3]
 ${textMenungguPembayaranOndashboardPage}    xpath=//p[text()='Menunggu Pembayaran']
 
 *** Keywords ***
