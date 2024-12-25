@@ -3,11 +3,11 @@ Library        SeleniumLibrary
 
 *** Variables ***
 ${textMenuKardosMarketPlace}                         xpath=//a[@href='/marketplace' and text()='Kardoos Marketplace']
-${buttonMintaPenawaranHargaOnMarketPlacePage}        xpath=//button[text()='Minta Penawaran Harga']
-${buttonPilihSekarangOnMarketPlacePage}              xpath=//button[text()='Pilih Sekarang!']
-${buttonCariSekarangOnMarketPlacePage}               xpath=//button[text()='Cari Sekarang!']
-${buttonCekSekarangOnMarketPlacePage}                xpath=//button[text()='Cek Sekarang!']
-${buttonCobaSekarangOnMarketPlacePage}               xpath=//button[text()='Coba Sekarang!']
+${buttonMintaPenawaranHargaOnMarketPlacePage}        xpath=//a/button[text()='Minta Penawaran Harga']
+${buttonPilihSekarangOnMarketPlacePage}              xpath=//a/button[text()='Pilih Sekarang!']
+${buttonCariSekarangOnMarketPlacePage}               xpath=//a/button[text()='Cari Sekarang!']
+${buttonCekSekarangOnMarketPlacePage}                xpath=//a/button[text()='Cek Sekarang!']
+${buttonCobaSekarangOnMarketPlacePage}               xpath=//a/button[text()='Coba Sekarang!']
 
 *** Keywords ***
 user is on marketplace page

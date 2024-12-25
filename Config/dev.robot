@@ -13,7 +13,7 @@ ${ACCOUNT_PASSWORD}         qwe123
 
 *** Keywords ***
 Begin Web Test
-    Remove Files                    /Users/muhammad.anggadirja/Documents/kardoos_automation_web/report/*.png
+    Remove Files                    /Users/muhammad.anggadirja/Documents/kardoos/report/*.png
     Open Browser                    about:blank            ${BROWSER}
     Set Window Size                 1920    1080
     Go To                           ${KARDOOS_URL}

@@ -25,7 +25,7 @@ user get product list on katalog page
 user go to product detail from katalog page
     Wait Until Element Is Visible        ${textJenisPackagingOnKatalogPage}
     ${totalproduct}                      Get Element Count                                   ${textJenisPackagingOnKatalogPage}
-    ${random}                            Evaluate    random.randint(1, 3)      modules=random
+    ${random}                            Evaluate    random.randint(1, 2)      modules=random
     ${index}                             Catenate    [${random}]  
     Set Local Variable                   ${textJenisPackagingOnKatalogPage}                  xpath=(//div[text()='Products']//ancestor::div/following-sibling::div//p[1])${index}
     ${randompackaging}                   Get Text                                            ${textJenisPackagingOnKatalogPage}

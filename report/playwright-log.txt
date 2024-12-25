@@ -1,0 +1,26 @@
+node:internal/modules/cjs/loader:1080
+  throw err;
+  ^
+
+Error: Cannot find module 'playwright-core'
+Require stack:
+- /Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/Browser/wrapper/node_modules/playwright/index.js
+- /Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/Browser/wrapper/index.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1077:15)
+    at Module._load (node:internal/modules/cjs/loader:922:27)
+    at Module.require (node:internal/modules/cjs/loader:1143:19)
+    at require (node:internal/modules/cjs/helpers:121:18)
+    at Object.<anonymous> (/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/Browser/wrapper/node_modules/playwright/index.js:17:18)
+    at Module._compile (node:internal/modules/cjs/loader:1256:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1310:10)
+    at Module.load (node:internal/modules/cjs/loader:1119:32)
+    at Module._load (node:internal/modules/cjs/loader:960:12)
+    at Module.require (node:internal/modules/cjs/loader:1143:19) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/Browser/wrapper/node_modules/playwright/index.js',
+    '/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/Browser/wrapper/index.js'
+  ]
+}
+
+Node.js v18.17.1
