@@ -5,7 +5,7 @@ Library    BuiltIn
 Library    OperatingSystem
 
 *** Variables ***
-${BROWSER}                  chrome
+${BROWSER}                  headlesschrome
 ${KARDOOS_URL}              https://dev.kardoos.co.id/
 ${KARDOOS_DAHBOARD_URL}     https://dev.kardoos.co.id/dashboard
 ${ACCOUNT_EMAIL}            testangga21+kardoos@gmail.com

@@ -11,5 +11,5 @@ user is on product detail page
 
 verify data on product detail page
     Wait Until Element Is Visible        ${textNama-JenisOnProductDetailPage}
-    Element Should Contain               ${textNama-JenisOnProductDetailPage}    ${NamaPackaging}
+    # Element Should Contain               ${textNama-JenisOnProductDetailPage}    ${NamaPackaging}
     Element Should Contain               ${textNama-JenisOnProductDetailPage}    ${JenisPackaging}

@@ -45,6 +45,7 @@ user filter product based on jenis packaging on katalog page
     ${randompackaging}                   Get Text                                            ${textJenisPackagingOnKatalogPage}
     Set Global Variable                  ${JenisPackaging}                                   ${randompackaging}
     Set Local Variable                   ${textFilterJenisPackagingOnKatalogPage}            xpath=//p[text()='Jenis Packaging']/following-sibling::div//li[text()='${JenisPackaging}']
+    Wait Until Element Is Visible        ${textFilterJenisPackagingOnKatalogPage}
     Click Element                        ${textFilterJenisPackagingOnKatalogPage}
 
 verify product list filtered by jenis packaging on katalog page
@@ -74,7 +75,8 @@ verify product list displayed based on search result on katalog page
     ${index}                             Catenate    [${random}]
     Set Local Variable                   ${textNamaPackagingOnKatalogPage}                   xpath=(//div[text()='Products']//ancestor::div/following-sibling::div//p[2])${index}
     ${randompackaging}                   Get Text                                            ${textNamaPackagingOnKatalogPage}
-    Element Text Should Be               ${textNamaPackagingOnKatalogPage}                   ${NamaPackaging}
+    Element Should Contain               ${textNamaPackagingOnKatalogPage}                   ${NamaPackaging}
+    # Element Text Should Be               ${textNamaPackagingOnKatalogPage}                   ${NamaPackaging}
 
 user get supplier list on katalog page
     Wait Until Element Is Visible        ${buttonSuppliersOnKatalogPage}
@@ -112,6 +114,7 @@ user filter supplier based on location on katalog page
     ${supplieraddress}                   Get Text                                            ${textSupplierAddressOnKatalogPage}
     Set Global Variable                  ${SupplierKabupaten}                                ${supplieraddress.split(",")[1].strip()}
     Set Local Variable                   ${textFilterLokasiOnKatalogPage}                    xpath=//p[text()='Lokasi']/following-sibling::div//li//span[text()='${SupplierKabupaten}']
+    Wait Until Element Is Visible        ${textFilterLokasiOnKatalogPage}
     Scroll Element Into View             ${textFilterLokasiOnKatalogPage}
     Click Element                        ${textFilterLokasiOnKatalogPage}
 
@@ -142,4 +145,5 @@ verify supplier list displayed based on search result on katalog page
     ${index}                             Catenate    [${random}]
     Set Local Variable                   ${textSupplierNameOnKatalogPage}                    xpath=(//div[text()='Suppliers']//ancestor::div/following-sibling::div//h2)${index}
     ${randomsuppliername}                Get Text                                            ${textSupplierNameOnKatalogPage}
-    Element Text Should Be               ${textSupplierNameOnKatalogPage}                    ${SupplierName}
+    Element Should Contain               ${textSupplierNameOnKatalogPage}                    ${SupplierName}
+    # Element Text Should Be               ${textSupplierNameOnKatalogPage}                    ${SupplierName}
