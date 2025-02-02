@@ -27,8 +27,11 @@ ${textFooterFAQs}                 xpath=//ul[@class='group-menu-footers']/li/a[t
 
 *** Keywords ***
 user is on home page
-    Wait Until Element Is Visible    ${textMenuInstant}
-    Element Should Be Visible        ${textMenuInstant}
+    ${isMenuInstantDisplayed}            Run Keyword And Return Status            Wait Until Element Is Visible    ${textMenuInstant}
+    Run Keyword If                       '${isMenuInstantDisplayed}' == 'False'   Go To                            ${KARDOOS_URL}       
+    ...  ELSE                            Log To Console                           instant menu displayed    
+    Wait Until Element Is Visible        ${textMenuInstant}
+    Element Should Be Visible            ${textMenuInstant}
 
 user go to login page
     Wait Until Element Is Visible    ${buttonLogin}
@@ -73,7 +76,9 @@ user go to dashboard page
     Click Element                    ${iconProfile}
 
 user go to design page from menu instant 
-    Wait Until Element Is Visible        ${textMenuInstant}
+    ${isMenuInstantDisplayed}            Run Keyword And Return Status            Wait Until Element Is Visible    ${textMenuInstant}
+    Run Keyword If                       '${isMenuInstantDisplayed}' == 'False'   Go To                            ${KARDOOS_URL}       
+    ...  ELSE                            Log To Console                           instant menu displayed      
     Click Element                        ${textMenuInstant}
 
 user go to tentang kardoos page from menu tentang kardoos

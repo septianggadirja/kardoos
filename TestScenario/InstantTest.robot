@@ -29,6 +29,7 @@ Create order via pesan sekarang
     And user select shipping method on checkout page    ${ShippingType}
     And user click button terapkan shipping on checkout page
     And user get choosen address on checkout page
+    And user get total amount on checkout page
     And user click button lanjut bayar on checkout page
     And user go to dashboard from checkout page
     Then user is on dashboard page
@@ -49,6 +50,7 @@ Create order via cart
     And user select shipping method on checkout page    ${ShippingType}
     And user click button terapkan shipping on checkout page
     And user get choosen address on checkout page
+    And user get total amount on checkout page
     And user click button lanjut bayar on checkout page
     And user go to dashboard from checkout page
     Then user is on dashboard page
@@ -85,3 +87,38 @@ Get finishing premium white on instant page
     When user choose material kardus    Premium - White
     And user click button info finishing on design page
     Then user get information about finishing premium white on deesign page
+
+Edit shipping address on checkout from cart page
+    [Arguments]    ${ModelKardus}    ${TipeUkuranKardus}    ${PanjangKardus}    ${LebarKardus}    ${TinggiKardus}    ${MaterialTypeKardus}    ${KecepatanProduksi}    ${QtyKardus}    ${ShippingType}
+    Given Access cart page
+    When user cleaning cart page
+    Then user click belanja sekarang on cart page
+    When Add product to cart    ${ModelKardus}    ${TipeUkuranKardus}    ${PanjangKardus}    ${LebarKardus}    ${TinggiKardus}    ${MaterialTypeKardus}    ${KecepatanProduksi}    ${QtyKardus}    ${ShippingType}
+    And user click button keranjang on design page
+    Then user is on cart page
+    When user click checkout button on cart page
+    Then user is on checkout page
+    When user click button ganti alamat on checkout page
+    And user choose shipping address on checkout page
+    And user click button terapkan for change address on checkout page
+    Then verify user should pilih kurir on checkout page
+
+Edit shipping address on checkout page
+    [Arguments]    ${ModelKardus}    ${TipeUkuranKardus}    ${PanjangKardus}    ${LebarKardus}    ${TinggiKardus}    ${MaterialTypeKardus}    ${KecepatanProduksi}    ${QtyKardus}    ${ShippingType}
+    Given user go to design page from menu instant
+    When Add product to cart    ${ModelKardus}    ${TipeUkuranKardus}    ${PanjangKardus}    ${LebarKardus}    ${TinggiKardus}    ${MaterialTypeKardus}    ${KecepatanProduksi}    ${QtyKardus}    ${ShippingType}
+    And user click button pesan sekarang
+    Then user is on checkout page
+    When user click button ganti alamat on checkout page
+    And user choose shipping address on checkout page
+    And user click button terapkan for change address on checkout page
+    Then verify user should pilih kurir on checkout page
+
+Edit qty on checkout page
+    [Arguments]    ${ModelKardus}    ${TipeUkuranKardus}    ${PanjangKardus}    ${LebarKardus}    ${TinggiKardus}    ${MaterialTypeKardus}    ${KecepatanProduksi}    ${QtyKardus}    ${ShippingType}
+    Given user go to design page from menu instant
+    When Add product to cart    ${ModelKardus}    ${TipeUkuranKardus}    ${PanjangKardus}    ${LebarKardus}    ${TinggiKardus}    ${MaterialTypeKardus}    ${KecepatanProduksi}    ${QtyKardus}    ${ShippingType}
+    And user click button pesan sekarang
+    Then user is on checkout page
+    When user edit qty on checkout page
+    Then verify user should pilih kurir on checkout page
