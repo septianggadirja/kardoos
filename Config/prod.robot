@@ -5,7 +5,7 @@ Library    BuiltIn
 Library    OperatingSystem
 
 *** Variables ***
-${BROWSER}                  chrome
+${BROWSER}                  headlesschrome
 ${KARDOOS_URL}              https://kardoos.co.id/
 ${KARDOOS_DAHBOARD_URL}     https://kardoos.co.id/dashboard
 ${ACCOUNT_EMAIL}            testangga21+kardoos@gmail.com
@@ -14,7 +14,7 @@ ${ACCOUNT_PASSWORD}         qwe123
 *** Keywords ***
 Begin Web Test
     Remove Files                    /Users/muhammad.anggadirja/Documents/kardoos/report/*.png
-    Open Browser                    about:blank            ${BROWSER}
+    Open Browser                    about:blank            ${BROWSER}    options=add_argument("--headless=new")
     Set Window Size                 1920    1080
     Go To                           ${KARDOOS_URL}
 

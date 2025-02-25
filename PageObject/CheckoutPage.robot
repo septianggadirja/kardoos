@@ -1,6 +1,6 @@
 *** Settings ***
 Library        SeleniumLibrary
-Library    String
+Library        String
 
 *** Variables ***
 ${textCheckoutTitle}                          xpath=//label[text()='Checkout']
@@ -20,6 +20,12 @@ ${textTotalOnCheckoutPage}                    xpath=//label[text()='Total']/pare
 ${radioListAlamatOnCheckoutPage}              xpath=(//input[@name='rdAlamat'])
 ${buttonTerapkanChangeAddressOnCheckoutPage}  xpath=//button[text()='Terapkan']
 ${inputQtyProductOnCheckoutPage}              xpath=//div[text()='Kuantiti']/following-sibling::div//input
+${buttonPromoOnCheckoutPage}                  xpath=//button[contains(@class,'btnVoucher')]
+${buttonResetPromoOnPopupVoucher}             xpath=//button[text()='Reset Promo']
+${inputVoucherCodeOnPopupVoucher}             xpath=//input[@placeholder='Masukan Kode Voucher']
+${buttonTerapkanOnPopupVoucher}               xpath=//button[text()='Terapkan']
+${buttonLanjutTanpaPromoOnPopupVoucher}       xpath=//button/div[text()='Lanjut Tanpa Promo']
+${buttonPakaiPromoOnPopupVoucher}             xpath=//button[contains(text(),'Pakai')]
 
 *** Keywords ***
 user is on checkout page
@@ -100,6 +106,7 @@ user go to dashboard from checkout page
 
 user get total amount on checkout page
     Wait Until Element Is Visible        ${textProductAmountOnCheckoutPage}
+    Sleep    5
     ${totalproductamount}                Get Text                            ${textProductAmountOnCheckoutPage}
     ${total_product_amount}              Remove String                       ${totalproductamount}                        Rp 
     ${total_product_amount_edit}=        Evaluate                            '''${total_product_amount}'''.strip()
@@ -142,3 +149,38 @@ user edit qty on checkout page
 verify user should pilih kurir on checkout page
     Wait Until Element Is Visible        ${buttonPilihKurirOnCartPage}
     Element Should Be Visible            ${buttonPilihKurirOnCartPage}
+
+user click cari promo to get popup voucher on checkout page
+    Wait Until Element Is Visible        ${buttonPromoOnCheckoutPage}
+    Click Element                        ${buttonPromoOnCheckoutPage}
+
+user reset promo on checkout page
+    ${havenotUsePromo}    Run Keyword And Return Status    Wait Until Element Is Visible        ${buttonLanjutTanpaPromoOnPopupVoucher}
+    Run Keyword If        '${havenotUsePromo}'=='True'     Log To Console                       belum ada voucher yang digunakan
+    ...    ELSE           Click Element                    ${buttonResetPromoOnPopupVoucher}
+
+user input voucher code on checkout page
+    Wait Until Element Is Visible            ${inputVoucherCodeOnPopupVoucher}
+    Input Text                               ${inputVoucherCodeOnPopupVoucher}        KODENYAOTOMATIS
+    Sleep    2
+    Click Element                            ${buttonTerapkanOnPopupVoucher}
+
+user apply voucher on checkout page
+    Wait Until Element Is Visible        ${buttonPakaiPromoOnPopupVoucher}
+    Click Element                        ${buttonPakaiPromoOnPopupVoucher}
+    Sleep    2
+
+user click button lanjut tanpa promo on checkout page
+    Wait Until Element Is Visible        ${buttonLanjutTanpaPromoOnPopupVoucher}
+    Click Element                        ${buttonLanjutTanpaPromoOnPopupVoucher}
+
+user remove all promo on checkout page
+    user click cari promo to get popup voucher on checkout page
+    user reset promo on checkout page
+    user click button lanjut tanpa promo on checkout page
+
+user input voucher code for order
+    user click cari promo to get popup voucher on checkout page
+    user reset promo on checkout page
+    user input voucher code on checkout page
+    user apply voucher on checkout page

@@ -49,6 +49,7 @@ user choose model kardus
 user choose tipe ukuran kardus
     [Arguments]    ${TipeUkuranKardus}
     Wait Until Element Is Visible    ${buttonMenuUkuranOnDesignPage}
+    Sleep    3
     Click Element                    ${buttonMenuUkuranOnDesignPage}
     Run Keyword If                   '${TipeUkuranKardus}' == 'Standard'    Click Element    ${buttonUkuranStandardOnDesignPage}
     ...  ELSE                        Click Element                          ${buttonUkuranCustomOnDesignPage}

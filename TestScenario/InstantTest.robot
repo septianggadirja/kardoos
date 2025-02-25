@@ -29,6 +29,7 @@ Create order via pesan sekarang
     And user select shipping method on checkout page    ${ShippingType}
     And user click button terapkan shipping on checkout page
     And user get choosen address on checkout page
+    And user remove all promo on checkout page
     And user get total amount on checkout page
     And user click button lanjut bayar on checkout page
     And user go to dashboard from checkout page
@@ -50,6 +51,7 @@ Create order via cart
     And user select shipping method on checkout page    ${ShippingType}
     And user click button terapkan shipping on checkout page
     And user get choosen address on checkout page
+    And user remove all promo on checkout page
     And user get total amount on checkout page
     And user click button lanjut bayar on checkout page
     And user go to dashboard from checkout page
@@ -122,3 +124,45 @@ Edit qty on checkout page
     Then user is on checkout page
     When user edit qty on checkout page
     Then verify user should pilih kurir on checkout page
+
+Create order with voucher code via pesan sekarang
+    [Arguments]    ${ModelKardus}    ${TipeUkuranKardus}    ${PanjangKardus}    ${LebarKardus}    ${TinggiKardus}    ${MaterialTypeKardus}    ${KecepatanProduksi}    ${QtyKardus}    ${ShippingType}
+    Given user go to design page from menu instant
+    When Add product to cart    ${ModelKardus}    ${TipeUkuranKardus}    ${PanjangKardus}    ${LebarKardus}    ${TinggiKardus}    ${MaterialTypeKardus}    ${KecepatanProduksi}    ${QtyKardus}    ${ShippingType}
+    And user click button pesan sekarang
+    Then user is on checkout page
+    When user choose shipping type on checkout page    ${ShippingType}
+    And user select shipping method on checkout page    ${ShippingType}
+    And user click button terapkan shipping on checkout page
+    And user get choosen address on checkout page
+    And user remove all promo on checkout page
+    And user input voucher code for order
+    And user get total amount on checkout page
+    And user click button lanjut bayar on checkout page
+    And user go to dashboard from checkout page
+    Then user is on dashboard page
+    When user go to kardoos instant order list page
+    Then verify data product on order list page
+
+Create order with voucher code via cart
+    [Arguments]    ${ModelKardus}    ${TipeUkuranKardus}    ${PanjangKardus}    ${LebarKardus}    ${TinggiKardus}    ${MaterialTypeKardus}    ${KecepatanProduksi}    ${QtyKardus}    ${ShippingType}
+    Given Access cart page
+    When user cleaning cart page
+    Then user click belanja sekarang on cart page
+    When Add product to cart    ${ModelKardus}    ${TipeUkuranKardus}    ${PanjangKardus}    ${LebarKardus}    ${TinggiKardus}    ${MaterialTypeKardus}    ${KecepatanProduksi}    ${QtyKardus}    ${ShippingType}
+    And user click button keranjang on design page
+    Then user is on cart page
+    When user click checkout button on cart page
+    Then user is on checkout page
+    When user choose shipping type on checkout page    ${ShippingType}
+    And user select shipping method on checkout page    ${ShippingType}
+    And user click button terapkan shipping on checkout page
+    And user get choosen address on checkout page
+    And user remove all promo on checkout page
+    And user input voucher code for order
+    And user get total amount on checkout page
+    And user click button lanjut bayar on checkout page
+    And user go to dashboard from checkout page
+    Then user is on dashboard page
+    When user go to kardoos instant order list page
+    Then verify data product on order list page
