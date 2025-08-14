@@ -15,7 +15,7 @@ ${ACCOUNT_PASSWORD}         qwe123
 
 *** Keywords ***
 Begin Web Test
-    Remove Files                    /Users/muhammad.anggadirja/Documents/kardoos/report/*.png
+    Remove Files                    /report/*.png
     Open Browser                    about:blank            ${BROWSER}    options=add_argument("--headless=new")       
     # Open Browser                    about:blank            ${BROWSER}    
     Set Window Size                 1920    1080
