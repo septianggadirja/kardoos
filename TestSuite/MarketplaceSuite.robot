@@ -30,7 +30,7 @@ verify user can get product detail from katalog page
 
 verify user can get supplier list with filter location on katalog page
     [Documentation]        This scenario to test user can get supplier list with filter by location on marketplace
-    [Tags]                 marketplace    positive   dev    staging     production                   
+    [Tags]                 marketplace    positive   dev    staging     production    failed                  
     Get supplier list with filter by location
 
 verify user can get supplier list with search on katalog page
@@ -45,25 +45,25 @@ verify user can get supplier detail from katalog page
 
 verify user can get product catalog from minta penawaran harga on marketplace page
     [Documentation]        This scenario to test user can get product catalog from minta penawaran harga on marketplace page
-    [Tags]                 marketplace    footer    positive    dev             
+    [Tags]                 marketplace    footer    positive    dev    staging    production             
     Get product catalog from minta penawaran harga on marketplace
 
 verify user can get product catalog from pilih sekarang on marketplace page
     [Documentation]        This scenario to test user can get product catalog from pilih sekarang on marketplace page
-    [Tags]                 marketplace    footer    positive    dev              
+    [Tags]                 marketplace    footer    positive    dev    staging    production              
     Get product catalog from pilih sekarang on marketplace
 
 verify user can get supplier list from cari sekarang harga on marketplace page
     [Documentation]        This scenario to test user can get supplier list from cari sekarang harga on marketplace page
-    [Tags]                 marketplace    footer    positive    dev            
+    [Tags]                 marketplace    footer    positive    dev    staging    production            
     Get supplier list from cari sekarang on marketplace
 
 verify user can get supplier list from cek sekarang harga on marketplace page
     [Documentation]        This scenario to test user can get supplier list from cek sekarang harga on marketplace page
-    [Tags]                 marketplace    footer    positive    dev             
+    [Tags]                 marketplace    footer    positive    dev    staging    production             
     Get supplier list from cek sekarang on marketplace
 
 verify user can get product catalog from coba sekarang on marketplace page
     [Documentation]        This scenario to test user can get product catalog from coba sekarang on marketplace page
-    [Tags]                 marketplace    footer    positive    dev               
+    [Tags]                 marketplace    footer    positive    dev    staging    production               
     Get product catalog from coba sekarang on marketplace

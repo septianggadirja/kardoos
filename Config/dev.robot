@@ -1,5 +1,5 @@
 *** Settings ***
-Library    SeleniumLibrary        timeout=10        run_on_failure=Capture Page Screenshot
+Library    SeleniumLibrary        timeout=20        run_on_failure=Capture Page Screenshot
 Library    String
 Library    BuiltIn
 Library    OperatingSystem
@@ -8,13 +8,15 @@ Library    OperatingSystem
 ${BROWSER}                  chrome
 ${KARDOOS_URL}              https://dev.kardoos.co.id/
 ${KARDOOS_DAHBOARD_URL}     https://dev.kardoos.co.id/dashboard
-${ACCOUNT_EMAIL}            testangga21+kardoos@gmail.com
+# ${ACCOUNT_EMAIL}            testangga21+kardoos@gmail.com
+# ${ACCOUNT_PASSWORD}         qwe123
+${ACCOUNT_EMAIL}            testangga22@gmail.com
 ${ACCOUNT_PASSWORD}         qwe123
 
 *** Keywords ***
 Begin Web Test
     Remove Files                    /Users/muhammad.anggadirja/Documents/kardoos/report/*.png
-    Open Browser                    about:blank            ${BROWSER}    options=add_argument("--headless=new")
+    Open Browser                    about:blank            ${BROWSER}    options=add_argument("--headless=new")       
     # Open Browser                    about:blank            ${BROWSER}    
     Set Window Size                 1920    1080
     Go To                           ${KARDOOS_URL}

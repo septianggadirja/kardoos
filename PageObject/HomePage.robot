@@ -2,28 +2,38 @@
 Library    SeleniumLibrary
 
 *** Variables ***
-${buttonLogin}                    xpath=//button[@class='login']
-${buttonRegister}                 xpath=//button[@class='register']
-${textMenuInstant}                xpath=//ul[@class='header-menu-list']/li/a[text()='Instant']
-${textMenuMarketplace}            xpath=//ul[@class='header-menu-list']/li/a[text()='Marketplace']
-${textMenuTentangKardoos}         xpath=//ul[@class='header-menu-list']/li/a[text()='Tentang KARDOOS']
-${textMenuFAQs}                   xpath=//ul[@class='header-menu-list']/li/a[text()='FAQs']
-${iconProfile}                    xpath=//img[contains(@src,'/images/profile.svg')]
-${iconCart}                       xpath=//div/img[contains(@src,'keranjang')]
-${buttonLogout}                   xpath=//div[@class='tab-login-menu']/div[6]
-${buttonConfirmLogout}            xpath=//div[text()='Keluar Akun']/following-sibling::div/button[text()='Iya']
-${textFooterTentangKardoos}       xpath=//ul[@class='group-menu-footers']/li/a[text()='Tentang KARDOOS']
-${textFooterMaterialProses}       xpath=//ul[@class='group-menu-footers']/li/a[text()='Material & Proses']
-${textFooterInspirasi}            xpath=//ul[@class='group-menu-footers']/li/a[text()='Inspirasi']
-${textFooterBlog}                 xpath=//ul[@class='group-menu-footers']/li/a[text()='Blog']
-${textFooterInstant}              xpath=//ul[@class='group-menu-footers']/li/a[text()='Instant']
-${textFooterInstantEditor}        xpath=//ul[@class='group-menu-footers']/li/a[text()='Instant Editor']
-${textFooterInstantTemplate}      xpath=//ul[@class='group-menu-footers']/li/a[text()='Instant Template']
-${textFooterMarketPlace}          xpath=//ul[@class='group-menu-footers']/li/a[text()='Marketplace']
-${textFooterCariSupplier}         xpath=//ul[@class='group-menu-footers']/li/a[text()='Cari Supplier']
-${textFooterSyaratKetentuan}      xpath=//ul[@class='group-menu-footers']/li/a[text()='Syarat dan Ketentuan']
-${textFooterKebijakanPrivasi}     xpath=//ul[@class='group-menu-footers']/li/a[text()='Kebijakan Privasi']
-${textFooterFAQs}                 xpath=//ul[@class='group-menu-footers']/li/a[text()='FAQs']
+${buttonLogin}                    xpath=//button[text()='Log in']
+${buttonRegister}                 xpath=//button[text()='Register']
+${textMenuInstant}                xpath=//a[@href='/design']
+${textMenuMarketplace}            xpath=//a[@href='/katalog']
+${textMenuTentangKardoos}         xpath=//a[@href='/tentang-kardoos?layout=true']
+${dropdownModelBox}               xpath=//span[text()='Model Box']/parent::button
+${textSubMenuMailerBox}           xpath=//span[text()='Model Box']/parent::button/following-sibling::div//button[text()='Mailer Box']
+${textSubMenuShippingBox}         xpath=//span[text()='Model Box']/parent::button/following-sibling::div//button[text()='Shipping Box']
+${textSubMenuGoodieBox}           xpath=//span[text()='Model Box']/parent::button/following-sibling::div//button[text()='Goodie Box']
+${textSubMenuPoshBox}             xpath=//span[text()='Model Box']/parent::button/following-sibling::div//button[text()='Posh Box']
+${textMenuFAQs}                   xpath=//a[@href='/faq']
+${iconProfile}                    xpath=//a[@href='/dashboard']
+${iconCart}                       xpath=//a[@href='/cart']//*[name()='svg']
+${buttonLogout}                   xpath=//a[@href='/dashboard']//ancestor::div/following-sibling::*[name()='svg']
+${buttonConfirmLogout}            xpath=//button[@id='btn-ok']
+${textFooterTentangKardoos}       xpath=//li/a[text()='Tentang KARDOOS']
+${textFooterMaterialProses}       xpath=//li/a[text()='Material & Proses']
+${textFooterInspirasi}            xpath=//li/a[text()='Inspirasi']
+${textFooterBlog}                 xpath=//li/a[text()='Blog']
+${textFooterInstant}              xpath=//li/a[text()='Instant']
+${textFooterInstantEditor}        xpath=//li/a[text()='Instant Editor']
+# ${textFooterInstantTemplate}      xpath=//li/a[text()='Instant Template']
+${textFooterModelBox}             xpath=//li/a/div[text()='Model Box']
+${textFooterMarketPlace}          xpath=//li/a[text()='Marketplace']
+${textFooterCariSupplier}         xpath=//li/a[text()='Cari Supplier']
+${textFooterSyaratKetentuan}      xpath=//li/a[text()='Syarat dan Ketentuan']
+${textFooterKebijakanPrivasi}     xpath=//li/a[text()='Kebijakan Privasi']
+${textFooterFAQs}                 xpath=//li/a[text()='FAQs']
+${textFooterMailerBox}            xpath=//div//a[text()='Mailer Box']
+${textFooterShippingBox}          xpath=//div//a[text()='Shipping Box']
+${textFooterGoodieBox}            xpath=//div//a[text()='Goodie Box']
+${textFooterPoshBox}              xpath=//div//a[text()='Posh Box']
 
 *** Keywords ***
 user is on home page
@@ -119,10 +129,15 @@ user go to design page from footer
     Scroll Element Into View             ${textFooterInstantEditor}
     Click Element                        ${textFooterInstantEditor}
 
+# user go to instant template page from footer
+#     Wait Until Element Is Visible        ${textFooterInstantTemplate}
+#     Scroll Element Into View             ${textFooterInstantTemplate}
+#     Click Element                        ${textFooterInstantTemplate}
+
 user go to instant template page from footer
-    Wait Until Element Is Visible        ${textFooterInstantTemplate}
-    Scroll Element Into View             ${textFooterInstantTemplate}
-    Click Element                        ${textFooterInstantTemplate}
+    Wait Until Element Is Visible        ${textFooterModelBox}
+    Scroll Element Into View             ${textFooterModelBox}
+    Click Element                        ${textFooterModelBox}
 
 user go to market place page from footer
     Wait Until Element Is Visible        ${textFooterMarketPlace}
@@ -148,3 +163,45 @@ user go to faqs page from footer
     Wait Until Element Is Visible        ${textFooterFAQs}
     Scroll Element Into View             ${textFooterFAQs}
     Click Element                        ${textFooterFAQs}
+
+user click mailer box from footer
+    Scroll Element Into View         ${textFooterMailerBox}
+    Click Element                    ${textFooterMailerBox}      
+
+user click shipping box from footer
+    Scroll Element Into View         ${textFooterShippingBox}
+    Click Element                    ${textFooterShippingBox}    
+
+user click goodie box from footer
+    Scroll Element Into View         ${textFooterGoodieBox}
+    Click Element                    ${textFooterGoodieBox}      
+
+user click posh box from footer
+    Scroll Element Into View         ${textFooterPoshBox}
+    Click Element                    ${textFooterPoshBox}  
+
+user choose model box from footer
+    [Arguments]    ${modelBox}
+    Wait Until Element Is Visible    ${textFooterModelBox}
+    Scroll Element Into View         ${textFooterModelBox}
+    ${isModelBoxOpen}                Run Keyword And Return Status    Wait Until Element Is Visible    ${textFooterMailerBox}    timeout=5
+    Run Keyword If                  '${isModelBoxOpen}' == 'True'     Log To Console    model box footer sudah terbuka
+    ...  ELSE                        Click Element                    ${textFooterModelBox}
+    Wait Until Element Is Visible    ${textFooterPoshBox}
+    Run Keyword If                  '${modelBox}' == 'mailer'         user click mailer box from footer 
+    ...  ELSE IF                    '${modelBox}' == 'shipping'       user click shipping box from footer
+    ...  ELSE IF                    '${modelBox}' == 'goodie'         user click goodie box from footer
+    ...  ELSE                       user click posh box from footer
+
+user open dropdown menu model box
+    ${isMenuModelBoxOpen}                Run Keyword And Return Status            Wait Until Element Is Visible    ${textSubMenuMailerBox}    timeput=10
+    Run Keyword If                       '${isMenuModelBoxOpen}' == 'False'       Click Element                    ${dropdownModelBox}  
+    ...  ELSE                            Log To Console                           menu model box open  
+
+user choose model box from header
+    [Arguments]    ${modelBox}
+    user open dropdown menu model box
+    Run Keyword If    '${modelBox}' == 'Mailer Box'      Click Element    ${textSubMenuMailerBox}
+    ...  ELSE IF      '${modelBox}' == 'Shipping Box'    Click Element    ${textSubMenuShippingBox}
+    ...  ELSE IF      '${modelBox}' == 'Goodie Box'      Click Element    ${textSubMenuGoodieBox}
+    ...  ELSE         Click Element                      ${textSubMenuPoshBox}

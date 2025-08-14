@@ -84,6 +84,18 @@ Directly go to design page with model goodiebox
     When user click button goodie box design sekarang on instant page
     Then user is on design page with model goodiebox selected
 
+Directly go to design page with model poshbox
+    [Arguments]    ${modelBox}
+    Given Access instant template page from footer based on model    ${modelBox}
+    When user click beli sekarang on instant template page
+    Then user is on design page based on model    ${modelBox}
+
+Directly go to design page with based on model
+    [Arguments]    ${modelBox}
+    Given Access instant template page from footer based on model    ${modelBox}
+    When user click beli sekarang on instant template page
+    Then user is on design page based on model    ${modelBox}
+
 Get finishing premium white on instant page
     Given user go to design page from menu instant
     When user choose material kardus    Premium - White
@@ -166,3 +178,26 @@ Create order with voucher code via cart
     Then user is on dashboard page
     When user go to kardoos instant order list page
     Then verify data product on order list page
+
+Create order via cart for specific shipping box with flute
+    [Arguments]    ${ModelKardus}    ${TipeUkuranKardus}    ${PanjangKardus}    ${LebarKardus}    ${TinggiKardus}    ${MaterialTypeKardus}    ${KecepatanProduksi}    ${QtyKardus}    ${ShippingType}    ${FluteShipping}
+    Given Access cart page
+    When user cleaning cart page
+    Then user click belanja sekarang on cart page
+    When Add product to cart    ${ModelKardus}    ${TipeUkuranKardus}    ${PanjangKardus}    ${LebarKardus}    ${TinggiKardus}    ${MaterialTypeKardus}    ${KecepatanProduksi}    ${QtyKardus}    ${ShippingType}
+    And user choose flute for shipping box    ${FluteShipping}
+    And user click button keranjang on design page
+    Then user is on cart page
+    When user click checkout button on cart page
+    Then user is on checkout page
+    When user choose shipping type on checkout page    ${ShippingType}
+    And user select shipping method on checkout page    ${ShippingType}
+    And user click button terapkan shipping on checkout page
+    And user get choosen address on checkout page
+    And user remove all promo on checkout page
+    And user get total amount on checkout page
+    And user click button lanjut bayar on checkout page
+    And user go to dashboard from checkout page
+    Then user is on dashboard page
+    When user go to kardoos instant order list page
+    Then verify data product flute on order list page

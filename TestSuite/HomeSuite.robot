@@ -10,7 +10,7 @@ Suite Teardown      End Web Test
 *** Test Cases ***
 verify user can access design page from header
     [Documentation]        This scenario to test user can access design page from header
-    [Tags]                 home    positive    dev    staging     production                         
+    [Tags]                 home    positive    dev    staging     production                             
     Access design page from header
 
 verify user can access katalog page from header
@@ -20,8 +20,17 @@ verify user can access katalog page from header
 
 verify user can access tentang kardoos page from header
     [Documentation]        This scenario to test user can access tentang kardoos page from header
-    [Tags]                 home    positive    dev    staging     production                       
+    [Tags]                 home    positive    dev    staging     production                           
     Access tentang kardoos page from header
+
+verify user can access instant template page from header based on model
+    [Documentation]        This scenario to test user can access instant template page from header based on model
+    [Tags]                 home    positive    dev    staging     production                       
+    [Template]    Access instant template page from header based on model
+    Posh Box
+    Mailer Box
+    Goodie Box
+    Shipping Box
 
 verify user can access faqs page from header
     [Documentation]        This scenario to test user can access faqs page from header
@@ -58,10 +67,10 @@ verify user can acess design page from footer
     [Tags]                 home    positive    dev    staging     production                     
     Access design page from footer
 
-verify user can access instant template page from footer
-    [Documentation]        This scenario to test user can access instant template page from footer
-    [Tags]                 home    positive    dev    staging     production                   
-    Access instant template page from footer
+# verify user can access instant template page from footer
+#     [Documentation]        This scenario to test user can access instant template page from footer
+#     [Tags]                 home    positive    dev    staging     production                   
+#     Access instant template page from footer
 
 verify user can access marketplace page from footer
     [Documentation]        This scenario to test user can access marketplace page from footer

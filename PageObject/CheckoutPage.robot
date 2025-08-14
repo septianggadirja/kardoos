@@ -3,21 +3,25 @@ Library        SeleniumLibrary
 Library        String
 
 *** Variables ***
-${textCheckoutTitle}                          xpath=//label[text()='Checkout']
-${textAddressNameOnCheckoutPage}              xpath=//label[@class='lbl-nama']/b
+${textCheckoutTitle}                          xpath=//p[text()='Checkout']
+# ${textAddressNameOnCheckoutPage}              xpath=//label[@class='lbl-nama']/b
+${textAddressNameOnCheckoutPage}              xpath=(//p[text()='Alamat Pengiriman']/following-sibling::div//div/p)[1]
 ${buttonGantiAlamatOnCheckoutPage}            xpath=//button[text()='Ganti Alamat']
-${buttonPilihKurirOnCartPage}                 xpath=//button[text()='Pilih Kurir']
+${buttonPilihKurirOnCartPage}                 xpath=//button[text()='Pilih kurir']
 ${buttonGantiKurirOnCartPage}                 xpath=//button[text()='Ganti Kurir']
 ${dropdownExpressShippingOnCartPage}          xpath=//span/b[text()='Express']
 ${textShippingExpressOptionOnCheckoutPage}    xpath=(//span/b[text()='Express']/ancestor::h2/following-sibling::div//div/b)
 ${dropdownRegulerShippingOnCartPage}          xpath=//span/b[text()='Reguler']
 ${textShippingRegulerOptionOnCheckoutPage}    xpath=(//span/b[text()='Reguler']/ancestor::h2/following-sibling::div//div/b)
+${dropdownSamedayShippingOnCartPage}          xpath=//span/b[text()='Sameday']
+${textShippingSamedayOptionOnCheckoutPage}    xpath=(//span/b[text()='Sameday']/ancestor::h2/following-sibling::div//div/b)
 ${buttonTerapkanShippingOnCheckoutPage}       xpath=//label[text()='Pilih kurir favoritmu']/parent::div/following-sibling::div/button[text()='Terapkan']
 ${buttonLanjutBayarOnCheckoutPage}            xpath=//button[text()='Lanjut Bayar']
-${textProductAmountOnCheckoutPage}            xpath=//div[@class='tipe-pesanan']/following-sibling::div[1]/div[@class='kanan']/label
-${textShippingFeeOnCheckoutPage}              xpath=//label[text()='Biaya pengiriman']/parent::div/following-sibling::div/label
-${textTotalOnCheckoutPage}                    xpath=//label[text()='Total']/parent::div/following-sibling::div/label
-${radioListAlamatOnCheckoutPage}              xpath=(//input[@name='rdAlamat'])
+${textProductAmountOnCheckoutPage}            xpath=//p[contains(text(),'Produksi')]/following-sibling::div[1]/div[2]/p[1]
+${textShippingFeeOnCheckoutPage}              xpath=//p[contains(text(),'Biaya Pengiriman')]/parent::div/following-sibling::div//p
+${textTotalOnCheckoutPage}                    xpath=//p[text()='Total']/following-sibling::div/p
+# ${radioListAlamatOnCheckoutPage}              xpath=(//input[@name='rdAlamat'])
+${radioListAlamatOnCheckoutPage}              xpath=//button[text()='Ubah Alamat']/ancestor::div/div/label[contains(@class,'radio')]
 ${buttonTerapkanChangeAddressOnCheckoutPage}  xpath=//button[text()='Terapkan']
 ${inputQtyProductOnCheckoutPage}              xpath=//div[text()='Kuantiti']/following-sibling::div//input
 ${buttonPromoOnCheckoutPage}                  xpath=//button[contains(@class,'btnVoucher')]
@@ -36,17 +40,19 @@ user is on checkout page
     Should Contain    ${current_url}    /shipping
 
 user click pilih kurir button on checkout page
-    Wait Until Element Is Visible        ${buttonPilihKurirOnCartPage}
+    Wait Until Element Is Visible        ${buttonPilihKurirOnCartPage}    timeout=120
     Scroll Element Into View             ${buttonPilihKurirOnCartPage}
     Click Element                        ${buttonPilihKurirOnCartPage}
 
 user click ganti kurir button on checkout page
     Wait Until Element Is Visible        ${buttonGantiKurirOnCartPage}
+    Sleep    2
     Scroll Element Into View             ${buttonGantiKurirOnCartPage}
     Click Element                        ${buttonGantiKurirOnCartPage}
 
 user choose shipping type express on checkout page
     Wait Until Element Is Visible    ${dropdownExpressShippingOnCartPage}
+    Sleep    2
     Scroll Element Into View         ${dropdownExpressShippingOnCartPage}
     Click Element                    ${dropdownExpressShippingOnCartPage}
 
@@ -55,15 +61,21 @@ user choose shipping type reguler on checkout page
     Scroll Element Into View         ${dropdownRegulerShippingOnCartPage}
     Click Element                    ${dropdownRegulerShippingOnCartPage}
 
+user choose shipping type sameday on checkout page
+    Wait Until Element Is Visible    ${dropdownSamedayShippingOnCartPage}
+    Scroll Element Into View         ${dropdownSamedayShippingOnCartPage}
+    Click Element                    ${dropdownSamedayShippingOnCartPage}
+
 user choose shipping type on checkout page
     [Arguments]    ${ShippingType}
     # user click pilih kurir button on checkout page
-    ${alreadyChooseKurir}                Run Keyword And Return Status            Wait Until Element Is Visible                    ${buttonGantiKurirOnCartPage}
+    ${alreadyChooseKurir}                Run Keyword And Return Status            Wait Until Element Is Visible                    ${buttonGantiKurirOnCartPage}    timeout=120
     Run Keyword If                       '${alreadyChooseKurir}' == 'True'        user click ganti kurir button on checkout page
     ...  ELSE                            user click pilih kurir button on checkout page
     Wait Until Element Is Visible        ${buttonTerapkanShippingOnCheckoutPage}
     Run Keyword If                       '${ShippingType}' == 'Express'           user choose shipping type express on checkout page
-    ...  ELSE                            user choose shipping type reguler on checkout page
+    ...  ELSE IF                         '${ShippingType}' == 'Reguler'           user choose shipping type reguler on checkout page
+    ...  ELSE                            user choose shipping type sameday on checkout page
 
 user select shipping method express on checkout page
     Wait Until Element Is Visible        ${textShippingExpressOptionOnCheckoutPage}
@@ -83,16 +95,27 @@ user select shipping method reguler on checkout page
     Scroll Element Into View             ${textShippingRegulerOptionOnCheckoutPage}
     Click Element                        ${textShippingRegulerOptionOnCheckoutPage}
 
+user select shipping method sameday on checkout page
+    Wait Until Element Is Visible        ${textShippingSamedayOptionOnCheckoutPage}
+    ${totalshippingmethod}               Get Element Count                                       ${textShippingSamedayOptionOnCheckoutPage}
+    ${random}                            Evaluate    random.randint(1, ${totalshippingmethod})   modules=random
+    ${index}                             Catenate    [${random}]  
+    Set Local Variable                   ${textShippingSamedayOptionOnCheckoutPage}              xpath=(//span/b[text()='Sameday']/ancestor::h2/following-sibling::div//div/b)${index}
+    Scroll Element Into View             ${textShippingSamedayOptionOnCheckoutPage}
+    Click Element                        ${textShippingSamedayOptionOnCheckoutPage}
+
 user select shipping method on checkout page
     [Arguments]    ${ShippingType}
     Run Keyword If    '${ShippingType}' == 'Express'    user select shipping method express on checkout page
-    ...  ELSE         user select shipping method reguler on checkout page
+    ...  ELSE IF      '${ShippingType}' == 'Reguler'    user select shipping method reguler on checkout page
+    ...  ELSE         user select shipping method sameday on checkout page
 
 user click button terapkan shipping on checkout page
     Wait Until Element Is Visible        ${buttonTerapkanShippingOnCheckoutPage}
     Click Element                        ${buttonTerapkanShippingOnCheckoutPage}
 
 user get choosen address on checkout page
+    Sleep    5
     Wait Until Element Is Visible    ${textAddressNameOnCheckoutPage}
     ${addressname}                   Get Text                            ${textAddressNameOnCheckoutPage}
     Set Global Variable              ${AddressName}                      ${addressname}
@@ -102,6 +125,7 @@ user click button lanjut bayar on checkout page
     Click Element                        ${buttonLanjutBayarOnCheckoutPage}
 
 user go to dashboard from checkout page
+    Sleep    5
     Go To    ${KARDOOS_DAHBOARD_URL}
 
 user get total amount on checkout page
@@ -125,14 +149,16 @@ user get total amount on checkout page
 
 user click button ganti alamat on checkout page
     Wait Until Element Is Visible        ${buttonGantiAlamatOnCheckoutPage}
+    Sleep    10
     Click Element                        ${buttonGantiAlamatOnCheckoutPage}
 
 user choose shipping address on checkout page
     Wait Until Element Is Visible        ${radioListAlamatOnCheckoutPage}
     ${totalshippingaddress}              Get Element Count                                       ${radioListAlamatOnCheckoutPage}
-    ${random}                            Evaluate    random.randint(1, ${totalshippingaddress})  modules=random
+    ${random}                            Evaluate    random.randint(2, ${totalshippingaddress})  modules=random
     ${index}                             Catenate    [${random}]  
-    Set Local Variable                   ${radioListAlamatOnCheckoutPage}                        xpath=(//input[@name='rdAlamat'])${index}
+    # Set Local Variable                   ${radioListAlamatOnCheckoutPage}                        xpath=(//input[@name='rdAlamat'])${index}
+    Set Local Variable                   ${radioListAlamatOnCheckoutPage}                        xpath=(//button[text()='Ubah Alamat']/ancestor::div/div/label[contains(@class,'radio')])${index}
     Scroll Element Into View             ${radioListAlamatOnCheckoutPage}
     Click Element                        ${radioListAlamatOnCheckoutPage}
 
@@ -142,9 +168,11 @@ user click button terapkan for change address on checkout page
 
 user edit qty on checkout page
     Wait Until Element Is Visible    ${inputQtyProductOnCheckoutPage}
+    Sleep    5
     Clear Element Text               ${inputQtyProductOnCheckoutPage}
-    Sleep    2
-    Input Text                       ${inputQtyProductOnCheckoutPage}    99
+    Sleep    5
+    # Click Element                    ${inputQtyProductOnCheckoutPage}
+    Input Text                       ${inputQtyProductOnCheckoutPage}    9
 
 verify user should pilih kurir on checkout page
     Wait Until Element Is Visible        ${buttonPilihKurirOnCartPage}
@@ -155,7 +183,7 @@ user click cari promo to get popup voucher on checkout page
     Click Element                        ${buttonPromoOnCheckoutPage}
 
 user reset promo on checkout page
-    ${havenotUsePromo}    Run Keyword And Return Status    Wait Until Element Is Visible        ${buttonLanjutTanpaPromoOnPopupVoucher}
+    ${havenotUsePromo}    Run Keyword And Return Status    Wait Until Element Is Visible        ${buttonLanjutTanpaPromoOnPopupVoucher}    timeout=5
     Run Keyword If        '${havenotUsePromo}'=='True'     Log To Console                       belum ada voucher yang digunakan
     ...    ELSE           Click Element                    ${buttonResetPromoOnPopupVoucher}
 

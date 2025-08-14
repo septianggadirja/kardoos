@@ -32,6 +32,12 @@ Access tentang kardoos page from header
     When user go to tentang kardoos page from menu tentang kardoos
     Then user is on tentang kardoos page
 
+Access instant template page from header based on model
+    [Arguments]    ${modelBox}
+    Given user is on home page
+    When user choose model box from header    ${modelBox}
+    Then user is on instant template page based on model    ${modelBox}
+
 Access FAQs page from header
     Given user is on home page
     When user go to faqs page from menu faqs
@@ -96,3 +102,9 @@ Access faqs page from footer
     Given user is on home page
     When user go to faqs page from footer
     Then user is on FAQs page
+
+Access instant template page from footer based on model
+    [Arguments]    ${modelBox}
+    Given user is on home page
+    When user choose model box from footer    ${modelBox}
+    Then user is on instant template page

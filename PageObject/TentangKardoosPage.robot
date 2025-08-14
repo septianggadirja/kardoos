@@ -2,7 +2,7 @@
 Library        SeleniumLibrary
 
 *** Variables ***
-${textTentangKardoosTitle}        xpath=//div[@class='header header-tentang-kardoos']//h1
+${textTentangKardoosTitle}        xpath=//p[contains(text(),'box')]
 
 *** Keywords ***
 user is on tentang kardoos page

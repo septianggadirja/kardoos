@@ -21,12 +21,12 @@ user is on cart page
 
 user cleaning cart page
     Sleep    2
-    ${haveProductOnCart}    Run Keyword And Return Status       Wait Until Element Is Visible    ${iconDeleteOnCartPage}
+    ${haveProductOnCart}    Run Keyword And Return Status       Wait Until Element Is Visible    ${iconDeleteOnCartPage}    timeout=10    
     Run Keyword If          '${haveProductOnCart}' == 'True'    user delete product from cart page
     ...  ELSE               Log To Console                      cart already empty    
 
 user delete product from cart page
-    Wait Until Element Is Visible        ${iconDeleteOnCartPage}
+    Wait Until Element Is Visible        ${iconDeleteOnCartPage}    timeout=10
     Click Element                        ${iconDeleteOnCartPage}
     Wait Until Element Is Visible        ${buttonHapusOnCartPage}
     Click Element                        ${buttonHapusOnCartPage}
